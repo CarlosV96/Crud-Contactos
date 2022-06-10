@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import {createContact} from "./apis/services";
+import {createContact, getContacts} from "./apis/services";
 
 function App() {
   const [nombre, setNombre] = useState("");
@@ -8,20 +8,32 @@ function App() {
   const [contact, setContact] = useState([]);
 
   const body = {
-    "nombreCompleto" : nombre,
-    "fechaNacimiento": fecha
+    nombreCompleto : nombre,
+    fechaNacimiento: fecha,
   }
 
   const saveContact = async () => {
     await createContact(body)
-      .then(items => {
-          setContact(items)
+      .then((items) => {
+        console.log(items);
       })
       .catch((error) => {
         console.log(error);
       });
   }
-console.log("CONTACT", contact);
+
+useEffect(() => {
+  let mounted = true;
+  getContacts()
+    .then(items => {
+      if(mounted) {
+        setContact(items)
+      }
+    })
+  return () => mounted = false;
+}, [])
+
+console.log("CONTACT----", contact);
   return (
     <div className="container">
       <div className="row">
@@ -56,6 +68,9 @@ console.log("CONTACT", contact);
         </div>
       </div>
       <p>Aqui estaremos creando una nueva App en React</p>
+      <ul>
+        
+      </ul>
     </div>
   );
 }
