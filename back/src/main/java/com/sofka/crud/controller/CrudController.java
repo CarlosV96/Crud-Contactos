@@ -27,6 +27,7 @@ import java.sql.SQLException;
 
 @Slf4j
 @RestController
+@CrossOrigin
 public class CrudController {
 
     @Autowired
@@ -56,7 +57,6 @@ public class CrudController {
      *
      * @return Objeto Response en formato JSON
      */
-    @CrossOrigin
     @GetMapping(path = "/api/v1/index")
     public ResponseEntity<Response> index() {
         response.restart();
@@ -118,7 +118,6 @@ public class CrudController {
      * @param contacto Objeto Contacto acrear
      * @return Objeto Response en formato JSON
      */
-    @CrossOrigin
     @PostMapping(path = "/api/v1/contacto")
     public ResponseEntity<Response> createContacto(@RequestBody Contacto contacto) {
         response.restart();

@@ -25,7 +25,7 @@ public class Email implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "email_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer emailId;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Contacto.class, optional = false)
