@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { Context } from "./../context/context";
+import { Context } from "../context/context";
 import { useNavigate } from "react-router-dom";
 import "./../../index.css";
 
 /**
- * Este componente me permite actualizar los telefonos
+ * Este componente me permite actualizar los correos electronicos
  * de determinado contacto.
  * @returns 
  */
-const UpdatePhone = () => {
-  const { singleContact, setPhones, deleteSinglePhone } =
+const UpdateEmail = () => {
+  const { singleContact, setEmails, deleteSingleEmail } =
     useContext(Context);
   const navigate = useNavigate();
 
@@ -19,27 +19,27 @@ const UpdatePhone = () => {
     });
   };
 
-  const goUpdateSinglePhone = (item) => {
-    setPhones(item);
+  const goUpdateSingleEmail = (item) => {
+    setEmails(item);
     navigate({
-      pathname: "/update-single-phone",
+      pathname: "/update-single-email",
     });
   };
 
   return (
     <div className="container">
       <div className="row">
-        <h4 className="title-book">Modificar Telefono</h4>
+        <h4 className="title-book">Modificar Correo</h4>
         <div className="col-md-12">
           {singleContact !== undefined ? (
-            singleContact.telefonos.map((item, index) => {
+            singleContact.emails.map((item, index) => {
               return (
                 <div className="contact-data" key={index}>
                   <div className="row">
                     <div className="col">
-                      <div className="label-info">Telefono</div>
+                      <div className="label-info">Correo</div>
                       <div className="data-info">
-                        <li> {item.telefono} </li>
+                        <li> {item.email} </li>
                       </div>
                     </div>
 
@@ -48,16 +48,16 @@ const UpdatePhone = () => {
                         type="button"
                         className="btn-close"
                         aria-label="Close"
-                        onClick={() => deleteSinglePhone(item.telId)}
+                        onClick={() => deleteSingleEmail(item.emailId)}
                       ></button>
                     </div>
                   </div>
                   <div className="btn-add-data">
                     <button
                       className="add-new-data"
-                      onClick={() => goUpdateSinglePhone(item)}
+                      onClick={() => goUpdateSingleEmail(item)}
                     >
-                      Modificar Telefono
+                      Modificar Correo
                     </button>
                   </div>
                 </div>
@@ -76,4 +76,4 @@ const UpdatePhone = () => {
   );
 };
 
-export default UpdatePhone;
+export default UpdateEmail;

@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 import "./../../index.css";
 import { patchFecha } from "./../../apis/services";
 
+/**
+ * Este componente me permite actualizar la fecha de nacimiento
+ * de determinado contacto.
+ * @returns 
+ */
 const UpdateFecha = () => {
   const { singleContact } = useContext(Context);
   const [fecha, setFecha] = useState("");

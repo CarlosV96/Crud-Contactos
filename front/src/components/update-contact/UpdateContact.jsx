@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 import "./../../index.css";
 import { putContact } from "./../../apis/services";
 
+/**
+ * Este componente me permite actualizar un contacto
+ * @returns 
+ */
 const UpdateContact = () => {
-  const { contact, singleContact, setSingleContact } = useContext(Context);
+  const { singleContact } = useContext(Context);
   const [nombre, setNombre] = useState("");
   const [fecha, setFecha] = useState("");
   const [update, setUpdate] = useState(false);
@@ -19,12 +23,10 @@ const UpdateContact = () => {
 
   const updateName = (e) => {
     setNombre(e.target.value);
-    //singleContact.nombreCompleto = e.target.value;
   };
 
   const updateFecha = (e) => {
     setFecha(e.target.value);
-    //singleContact.nombreCompleto = e.target.value;
   };
 
   const body = {

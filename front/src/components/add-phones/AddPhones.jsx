@@ -1,14 +1,19 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "./../context/context";
 import { useNavigate } from "react-router-dom";
 import "./../../index.css";
 import { createPhone } from "./../../apis/services";
 
+/**
+ * Este componente me permite agregar nuevos telefonos
+ * a determinado contacto.
+ * @returns 
+ */
 const AddPhones = () => {
-  const { contact, singleContact } = useContext(Context);
+  const { singleContact } = useContext(Context);
   const [phone, setPhone] = useState("");
   const navigate = useNavigate();
-  
+
   const goContactBook = () => {
     navigate({
       pathname: "/",
@@ -17,7 +22,7 @@ const AddPhones = () => {
 
   const body = {
     contacto: {
-      id: singleContact.id
+      id: singleContact.id,
     },
     telefono: phone,
   };
@@ -26,13 +31,12 @@ const AddPhones = () => {
     await createPhone(body)
       .then((items) => {
         console.log(items);
+        setPhone("");
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  console.log("CONTACTO ", singleContact);
 
   return (
     <div className="contact-book-phones">
@@ -60,6 +64,7 @@ const AddPhones = () => {
             </form>
 
             <button onClick={() => savePhone()}>Guardar</button>
+            
           </div>
         </div>
         <hr />
@@ -67,10 +72,8 @@ const AddPhones = () => {
           Volver al menú principal
         </button>
       </div>
-      </div>
-
+    </div>
   );
 };
 
 export default AddPhones;
-

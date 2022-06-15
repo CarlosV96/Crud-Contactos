@@ -2,11 +2,19 @@ import React, { useEffect, useContext, useState } from "react";
 import { Context } from "./../context/context";
 import "./../../index.css";
 import user from "./../../images/foto.png";
+import libreta from "./../../images/libreta.png"
 import { useNavigate } from "react-router-dom";
 import { createContact, getContacts } from "./../../apis/services";
 
+/**
+ * Este componente es la parte principal de todo el proyecto
+ * Presenta los contactos creados, con sus respectivos correos, y telefonos.
+ * Permite eliminar contactos, y da la opción de modificar.
+ * @returns
+ */
 const ContactBook = () => {
-  const { contact, setContact, deleteSingleContact, setSingleContact } = useContext(Context);
+  const { contact, setContact, deleteSingleContact, setSingleContact } =
+    useContext(Context);
   const [nombre, setNombre] = useState("");
   const [fecha, setFecha] = useState("");
   const navigate = useNavigate();
@@ -53,6 +61,13 @@ const ContactBook = () => {
     });
   };
 
+  const goUpdateEmail = (item) => {
+    setSingleContact(item);
+    navigate({
+      pathname: "/update-email",
+    });
+  };
+
   const body = {
     nombreCompleto: nombre,
     fechaNacimiento: fecha,
@@ -86,13 +101,16 @@ const ContactBook = () => {
       <div className="container">
         <div className="row">
           <h4 className="title-book">Libreta de Contactos</h4>
+          <div className="col-12">
+            <img src={libreta} alt="libreta" className="img-libreta" />
+          </div>
           <div className="col-md-12">
             <form>
               <div className="row">
                 <div className="col-md-6">
                   <div className="mb-3">
                     <label htmlFor="nombre" className="form-label">
-                      Nombre
+                      Nombre Completo
                     </label>
                     <input
                       type="text"
@@ -207,7 +225,13 @@ const ContactBook = () => {
                       className="add-new-data"
                       onClick={() => goUpdatePhone(item)}
                     >
-                      Actualizar Número telefónico
+                      Modificar o Eliminar Teléfonos
+                    </button>
+                    <button
+                      className="add-new-data"
+                      onClick={() => goUpdateEmail(item)}
+                    >
+                      Modificar o Eliminar Correos
                     </button>
                   </div>
                 </div>

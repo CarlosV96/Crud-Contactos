@@ -1,26 +1,7 @@
 import axios from "axios";
 
 /**
- * Esta función hace el consumo con el back para crear un nuevo contacto
- * @param {*} body 
- * @returns 
- */
-export const createContact = async (body) => {
-  const url = "http://localhost:8080/api/v1/contacto";
-  try {
-    const response = await axios.post(url, body, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-    return response;
-  } catch (error) {
-    return error;
-  }
-};
-
-/**
- * Esta función hace el consumo con el back para obtener todos los contactos
+ * API para obtener todos los contactos
  * @returns La respuesta de la API en este caso, todos los contactos.
  */
 export const getContacts = async () => {
@@ -38,15 +19,14 @@ export const getContacts = async () => {
 };
 
 /**
- * Delete
- * a un contacto
- * @param {*} body 
- * @returns 
+ * API para crear un nuevo contacto
+ * @param {*} body
+ * @returns
  */
- export const deleteContact = async (id) => {
-  const url = "http://localhost:8080/api/v1/contacto/" + id;
+export const createContact = async (body) => {
+  const url = "http://localhost:8080/api/v1/contacto";
   try {
-    const response = await axios.delete(url, {
+    const response = await axios.post(url, body, {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
@@ -58,31 +38,9 @@ export const getContacts = async () => {
 };
 
 /**
- * Esta función hace el consumo con el back para actualizar la tupla completa de un
- * contacto
- * @param {*} body 
- * @returns 
- */
- export const putContact = async (body, id) => {
-  const url = "http://localhost:8080/api/v1/contacto/" + id;
-  try {
-    const response = await axios.put(url, body, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-    //return (response => this.setState({ updatedAt: response.data.updatedAt }));
-    return response;
-  } catch (error) {
-    return error;
-  }
-};
-
-/**
- * Esta función hace el consumo con el back para crearle un nuevo telefono
- * a un contacto
- * @param {*} body 
- * @returns 
+ * API para crearle un nuevo telefono a un contacto
+ * @param {*} body
+ * @returns
  */
 export const createPhone = async (body) => {
   const url = "http://localhost:8080/api/v1/telefono";
@@ -99,12 +57,11 @@ export const createPhone = async (body) => {
 };
 
 /**
- * Esta función hace el consumo con el back para crearle un nuevo email
- * a un contacto
- * @param {*} body 
- * @returns 
+ * API para crearle un nuevo correo a un contacto
+ * @param {*} body
+ * @returns
  */
- export const createEmail = async (body) => {
+export const createEmail = async (body) => {
   const url = "http://localhost:8080/api/v1/email";
   try {
     const response = await axios.post(url, body, {
@@ -119,12 +76,30 @@ export const createPhone = async (body) => {
 };
 
 /**
- * Esta función hace el consumo con el back para actualizar el nombre de un
- * contacto
- * @param {*} body 
- * @returns 
+ * API para actualizar la tupla completa de un contacto
+ * @param {*} body
+ * @returns
  */
- export const patchName = async (body, id) => {
+export const putContact = async (body, id) => {
+  const url = "http://localhost:8080/api/v1/contacto/" + id;
+  try {
+    const response = await axios.put(url, body, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+/**
+ * API para actualizar solo el nombre de un contacto
+ * @param {*} body
+ * @returns
+ */
+export const patchName = async (body, id) => {
   const url = "http://localhost:8080/api/v1/contacto/" + id + "/name";
   try {
     const response = await axios.patch(url, body, {
@@ -140,12 +115,11 @@ export const createPhone = async (body) => {
 };
 
 /**
- * Esta función hace el consumo con el back para actualizar la fecha de
- * nacimiento de un contacto
- * @param {*} body 
- * @returns 
+ * API para actualizar solo la fecha de nacimiento de un contacto
+ * @param {*} body
+ * @returns
  */
- export const patchFecha = async (body, id) => {
+export const patchFecha = async (body, id) => {
   const url = "http://localhost:8080/api/v1/contacto/" + id + "/fecha";
   try {
     const response = await axios.patch(url, body, {
@@ -153,7 +127,6 @@ export const createPhone = async (body) => {
         "Access-Control-Allow-Origin": "*",
       },
     });
-    //return (response => this.setState({ updatedAt: response.data.updatedAt }));
     return response;
   } catch (error) {
     return error;
@@ -161,12 +134,11 @@ export const createPhone = async (body) => {
 };
 
 /**
- * Esta función hace el consumo con el back para actualizar la tupla completa de un
- * telefono
- * @param {*} body 
- * @returns 
+ * API para actualizar la tupla completa de un telefono
+ * @param {*} body
+ * @returns
  */
- export const putPhone = async (body, id) => {
+export const putPhone = async (body, id) => {
   const url = "http://localhost:8080/api/v1/telefono/" + id;
   try {
     const response = await axios.put(url, body, {
@@ -174,7 +146,84 @@ export const createPhone = async (body) => {
         "Access-Control-Allow-Origin": "*",
       },
     });
-   
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+/**
+ * API para actualizar la tupla completa de un correo
+ * @param {*} body
+ * @returns
+ */
+export const putEmail = async (body, id) => {
+  const url = "http://localhost:8080/api/v1/email/" + id;
+  try {
+    const response = await axios.put(url, body, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+/**
+ * API para eliminar un contacto.
+ * @param {*} body
+ * @returns
+ */
+export const deleteContact = async (id) => {
+  const url = "http://localhost:8080/api/v1/contacto/" + id;
+  try {
+    const response = await axios.delete(url, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+/**
+ * API para borrar un telefono de un contacto
+ * @param {*} body
+ * @returns
+ */
+export const deletePhone = async (id) => {
+  const url = "http://localhost:8080/api/v1/telefono/" + id;
+  try {
+    const response = await axios.delete(url, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+/**
+ * API para borrar un correo de un contacto
+ * @param {*} body
+ * @returns
+ */
+export const deleteEmail = async (id) => {
+  const url = "http://localhost:8080/api/v1/email/" + id;
+  try {
+    const response = await axios.delete(url, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
     return response;
   } catch (error) {
     return error;

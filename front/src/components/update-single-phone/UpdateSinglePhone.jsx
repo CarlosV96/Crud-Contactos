@@ -2,16 +2,16 @@ import React, { useContext, useState } from "react";
 import { Context } from "./../context/context";
 import { useNavigate } from "react-router-dom";
 import "./../../index.css";
-import { patchName } from "./../../apis/services";
+import { putPhone } from "../../apis/services";
 
 /**
- * Este componente me permite actualizar el nombre
- * de determinado contacto.
+ * Este componente me permite actualizar el telefono
+ * seleccionado previamente de un determinado contacto.
  * @returns 
  */
-const UpdateName = () => {
-  const { singleContact } = useContext(Context);
-  const [nombre, setNombre] = useState("");
+const UpdateSinglePhone = () => {
+  const { singleContact, phones } = useContext(Context);
+  const [phone, setPhone] = useState("");
   const [update, setUpdate] = useState(false);
   const navigate = useNavigate();
 
@@ -21,20 +21,23 @@ const UpdateName = () => {
     });
   };
 
-  const updateNames = (e) => {
-    setNombre(e.target.value);
+  const updatePhones = (e) => {
+    setPhone(e.target.value);
   };
 
   const body = {
-    nombreCompleto: nombre,
+    contacto: {
+      id: singleContact.id,
+    },
+    telefono: phone,
   };
 
-  const updateSingleName = async () => {
-    await patchName(body, singleContact.id)
+  const updateSinglePhone = async () => {
+    await putPhone(body, phones.telId)
       .then((items) => {
         console.log(items);
         setUpdate(true);
-        setNombre("");
+        setPhone("");
       })
       .catch((error) => {
         console.log(error);
@@ -44,36 +47,38 @@ const UpdateName = () => {
   return (
     <div className="container">
       <div className="row">
-        <h4 className="title-book">Modificar Nombre</h4>
+        <h4 className="title-book">Modificar Telefono</h4>
         <div className="col-md-12">
           <form>
             <div className="row">
               <div className="col-md-6">
                 <div className="mb-3">
                   <label htmlFor="nombre" className="form-label">
-                    Nombre
+                    Teléfono
                   </label>
                   <input
                     disabled={true}
                     type="text"
                     className="form-control"
-                    value={singleContact.nombreCompleto}
+                    value={phones.telefono}
                   />
 
-                  <p className="mt-3 mb-0">Ingrese nuevo nombre</p>
+                  <p className="mt-3 mb-0">Ingrese nuevo telefono</p>
                   <input
                     type="text"
                     className="form-control"
-                    id="nombre"
-                    value={nombre}
-                    onChange={updateNames}
+                    id="phone"
+                    value={phone}
+                    onChange={updatePhones}
                   />
                 </div>
               </div>
             </div>
           </form>
-          <button onClick={() => updateSingleName()}>Actualizar Nombre</button>
-          {update ? <p>NOMBRE ACTUALIZADO</p> : null}
+          <button onClick={() => updateSinglePhone()}>
+            Actualizar Teléfono
+          </button>
+          {update ? <p>TELEFONO ACTUALIZADO</p> : null}
         </div>
       </div>
       <hr />
@@ -84,4 +89,4 @@ const UpdateName = () => {
   );
 };
 
-export default UpdateName;
+export default UpdateSinglePhone;

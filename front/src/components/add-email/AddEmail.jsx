@@ -4,8 +4,13 @@ import { useNavigate } from "react-router-dom";
 import "./../../index.css";
 import { createEmail } from "./../../apis/services";
 
+/**
+ * Este componente me permite agregar nuevos correos electronicos
+ * a determinado contacto.
+ * @returns 
+ */
 function AddEmail() {
-  const { contact, singleContact } = useContext(Context);
+  const { singleContact } = useContext(Context);
   const [correo, setCorreo] = useState("");
   const navigate = useNavigate();
 
@@ -26,6 +31,7 @@ function AddEmail() {
     await createEmail(body)
       .then((items) => {
         console.log(items);
+        setCorreo("");
       })
       .catch((error) => {
         console.log(error);
