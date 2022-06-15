@@ -1,70 +1,51 @@
+# CRUD De una libreta de contactos
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Inicia De la siguiente manera
+![image](https://user-images.githubusercontent.com/97989722/173919336-10cd3554-c846-4bd4-900f-4b79a755338b.png)
 
-In the project directory, you can run:
+Cuando está arrancando el programa, todos los campos estarán vacíos por lo cual aparecerá un mensaje que indica que no hay campos para mostrar.
 
-### `npm start`
+El campo del nombre completo deberá ser llenado con información al igual que la fecha de nacimiento, posteriormente se debe guardar esta información para poder continuar con el crud.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Posterior al guardar información de contacto
+![image](https://user-images.githubusercontent.com/97989722/173919531-832b91d1-f0f7-4b68-b263-95f055009d62.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Se imprime en pantalla el nombre completo del contacto, la fecha de nacimiento, telefonos y/o correos asignados a este contacto.
+A medida que se van creando distintos usuarios, se van generando hacia abajo nuevos recuadros presentando cada contacto nuevo creado.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+También se muestran distintos botones con las diferentes opciones planteadas en el ejercicio.
+Para eliminar un contacto, se debe oprimir la "X" que se encuentra en el costado superior derecho del recuadro del contacto
+- Agregar teléfonos.
+- Agregar Correos.
+- Actualizar Contacto (Tupla completa: nombre y fecha de nacimiento)
+- Actualizar Solo el nombre
+- Actualizar solo la fecha de nacimiento
+- Actualizar o Eliminar un teléfono.
+- Actualizar o Eliminar un correo.
 
-### `npm run build`
+# Agregar Teléfono/Email
+![image](https://user-images.githubusercontent.com/97989722/173919859-daac6e01-ab03-4075-bb30-ca4eee44d6ea.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La imagen anterior sería la presentación para agregar un número teléfonico, solo sería presionar sobre el botón de guardar, e inmediatamente al contacto sobre el cual presionamos el botón agregar teléfono, le estaremos anexando un numero telefónico nuevo. El mismo procedimiento sería para el correo electrónico.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Modificar contacto
+![image](https://user-images.githubusercontent.com/97989722/173920275-9af62205-1449-43b5-a6e8-d3507c79b5cb.png)
 
-### `npm run eject`
+Esta sería la forma como podemos modificar la tupla completa del contacto (Nombre completo y fecha de nacimiento), De igual manera sería a modo individual para realizar la modificación del nombre, o de la fecha por separado.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Modificar o eliminar Teléfono/Email
+![image](https://user-images.githubusercontent.com/97989722/173920323-f9c3c116-4c98-4d3b-a9ea-ce19488c19b6.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Si simplemente deseo modificar el teléfono me sale este recuadro en el cual al presionar el botón de modificar me transporta a una nueva pantalla (Siguiente imagen ) que me presenta la información actual y un campo para ingresar el nuevo teléfono. Para eliminar se debe hacer con la "X" del costado superior derecho.
+![image](https://user-images.githubusercontent.com/97989722/173920380-e818d720-5f21-4789-8c5d-cdccb9ebd737.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
