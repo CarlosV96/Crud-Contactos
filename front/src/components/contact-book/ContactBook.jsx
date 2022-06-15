@@ -3,14 +3,10 @@ import { Context } from "./../context/context";
 import "./../../index.css";
 import user from "./../../images/foto.png";
 import { useNavigate } from "react-router-dom";
-import {
-  createContact,
-  getContacts,
-  deleteContact,
-} from "./../../apis/services";
+import { createContact, getContacts } from "./../../apis/services";
 
 const ContactBook = () => {
-  const { contact, setContact, deleteSingleContact, singleContact, setSingleContact } = useContext(Context);
+  const { contact, setContact, deleteSingleContact, setSingleContact } = useContext(Context);
   const [nombre, setNombre] = useState("");
   const [fecha, setFecha] = useState("");
   const navigate = useNavigate();
@@ -36,6 +32,26 @@ const ContactBook = () => {
     });
   };
 
+  const goUpdateName = (item) => {
+    setSingleContact(item);
+    navigate({
+      pathname: "/update-name",
+    });
+  };
+
+  const goUpdateFecha = (item) => {
+    setSingleContact(item);
+    navigate({
+      pathname: "/update-fecha",
+    });
+  };
+
+  const goUpdatePhone = (item) => {
+    setSingleContact(item);
+    navigate({
+      pathname: "/update-phone",
+    });
+  };
 
   const body = {
     nombreCompleto: nombre,
@@ -56,9 +72,9 @@ const ContactBook = () => {
     let mounted = true;
     getContacts()
       .then((items) => {
-        if(mounted) {
-            setContact(items);
-          }
+        if (mounted) {
+          setContact(items);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -126,15 +142,25 @@ const ContactBook = () => {
                     <div className="col">
                       <div className="label-info">Telefonos</div>
                       <div className="data-info">
-                        
                         {item.telefonos.length > 0 ? (
                           item.telefonos.map((item, index) => {
-                            return ( 
-                            <li key={index}> {item.telefono} </li>
-                          )})
-                        ): 
+                            return <li key={index}> {item.telefono} </li>;
+                          })
+                        ) : (
                           <p> No hay telefonos para mostrar </p>
-                        }
+                        )}
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="label-info">Correos</div>
+                      <div className="data-info">
+                        {item.emails.length > 0 ? (
+                          item.emails.map((item, index) => {
+                            return <li key={index}> {item.email} </li>;
+                          })
+                        ) : (
+                          <p> No hay correos para mostrar </p>
+                        )}
                       </div>
                     </div>
                     <div className="col-1 d-flex align-items-center justify-content-end">
@@ -164,6 +190,24 @@ const ContactBook = () => {
                       onClick={() => goUpdateContact(item)}
                     >
                       Actualizar Contacto
+                    </button>
+                    <button
+                      className="add-new-data"
+                      onClick={() => goUpdateName(item)}
+                    >
+                      Actualizar Nombre
+                    </button>
+                    <button
+                      className="add-new-data"
+                      onClick={() => goUpdateFecha(item)}
+                    >
+                      Actualizar Fecha de Nacimiento
+                    </button>
+                    <button
+                      className="add-new-data"
+                      onClick={() => goUpdatePhone(item)}
+                    >
+                      Actualizar Número telefónico
                     </button>
                   </div>
                 </div>

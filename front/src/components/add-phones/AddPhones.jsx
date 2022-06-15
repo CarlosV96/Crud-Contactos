@@ -17,7 +17,7 @@ const AddPhones = () => {
 
   const body = {
     contacto: {
-      id: contact.data.data[1].id
+      id: singleContact.id
     },
     telefono: phone,
   };
@@ -31,6 +31,7 @@ const AddPhones = () => {
         console.log(error);
       });
   };
+
   console.log("CONTACTO ", singleContact);
 
   return (
@@ -62,7 +63,6 @@ const AddPhones = () => {
           </div>
         </div>
         <hr />
-
         <button className="add-new-data" onClick={() => goContactBook()}>
           Volver al menú principal
         </button>
