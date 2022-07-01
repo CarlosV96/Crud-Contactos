@@ -8,7 +8,6 @@ import com.sofka.crud.utility.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,28 +24,62 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Controlador para la el crud o la libreta de contactos
+ *
+ * @author Carlos Valencia <caliche-9696@hotmail.com>
+ * @version 1.0.0 2022-07-01
+ * @since 1.0.0
+ */
 @Slf4j
 @RestController
 @CrossOrigin
 public class CrudController {
 
+    /**
+     * Servicio para el manejo de la libreta
+     */
     @Autowired
     private LibretaService libretaService;
 
+    /**
+     * Variable para el manejo de las respuestas de la API
+     */
     private Response response = new Response();
 
+    /**
+     * Manejo del código HTTP que se responde en las API
+     */
     private HttpStatus httpStatus = HttpStatus.OK;
 
+    /**
+     * Atención a la dirección raíz del sistema, este redirige a /api/v1/index
+     *
+     * @param httpResponse Objeto HttpServletResponse usado para redireccionar el controlador
+     * @return Objeto Response en formato JSON
+     */
     @GetMapping(path = "/")
     public ResponseEntity<Response> homeIndex1(HttpServletResponse httpResponse) {
         return getResponseHome(httpResponse);
     }
 
+    /**
+     * Atención a la dirección raíz del sistema, este redirige a /api/v1/index
+     *
+     * @param httpResponse Objeto HttpServletResponse usado para redireccionar el controlador
+     * @return Objeto Response en formato JSON
+     */
     @GetMapping(path = "/api/")
     public ResponseEntity<Response> homeIndex2(HttpServletResponse httpResponse) {
         return getResponseHome(httpResponse);
     }
 
+    /**
+     * Atención a la dirección raíz del sistema, este redirige a /api/v1/index
+     *
+     * @param httpResponse Objeto HttpServletResponse usado para redireccionar el controlador
+     * @return Objeto Response en formato JSON
+     */
     @GetMapping(path = "/api/v1/")
     public ResponseEntity<Response> homeIndex3(HttpServletResponse httpResponse) {
         return getResponseHome(httpResponse);
@@ -68,54 +101,11 @@ public class CrudController {
         }
         return new ResponseEntity(response, httpStatus);
     }
-/*
-    /**
-     * Devuelve todos los contactos con sus teléfonos y emails ordenados por nombre de forma ascendente o descendente
-     *
-     * @param orderBy Nombre del campo por donde se desea ordenar la información
-     * @param order Tipo de orden que debe tener la información ASC o DESC
-     * @return Objeto Response en formato JSON
-     *
-    @GetMapping(path = "/api/v1/index/orderby/{orderBy}/{order}")
-    public ResponseEntity<Response> indexOrderBy(
-            @PathVariable(value="orderBy") String orderBy,
-            @PathVariable(value="order") Sort.Direction order
-    ) {
-        response.restart();
-        try {
-            response.data = libretaService.getList(orderBy, order);
-            httpStatus = httpStatus.OK;
-        } catch (Exception exception) {
-            getErrorMessageInternal(exception);
-        }
-        return new ResponseEntity(response, httpStatus);
-    }
-
-    /**
-     * Devuelve el listado de contactos y sus teléfonos basados en un datos a buscar por nombre
-     *
-     * @param dataToSearch Información a buscar
-     * @return Objeto Response en formato JSON
-     *
-    @GetMapping(path = "/api/v1/buscar/contacto/{dataToSearch}")
-    public ResponseEntity<Response> searchContactByNombre(
-            @PathVariable(value="dataToSearch") String dataToSearch
-    ) {
-        response.restart();
-        try {
-            response.data = libretaService.buscarContacto(dataToSearch);
-            httpStatus = HttpStatus.OK;
-        } catch (Exception exception) {
-            getErrorMessageInternal(exception);
-        }
-        return new ResponseEntity(response, httpStatus);
-    }
-*/
 
     /**
      * Crea un nuevo contacto
      *
-     * @param contacto Objeto Contacto acrear
+     * @param contacto Objeto Contacto a crear
      * @return Objeto Response en formato JSON
      */
     @PostMapping(path = "/api/v1/contacto")
@@ -376,7 +366,7 @@ public class CrudController {
     }
 
     /**
-     * Administrador para la redirección al controllador /api/v1/index
+     * Administrador para la redirección al controlador /api/v1/index
      *
      * @param httpResponse Objeto HttpServletResponse para el manejo de la redirección
      * @return Objeto Response en formato JSON
@@ -435,56 +425,3 @@ public class CrudController {
         }
     }
 }
-
-    /*
-     ESTE CAMPO NO SE USA YA QUE AL MODIFICAR LA TUPLA DE TELEFONO
-     SE MODIFICA LO QUE LLEVA EN SU INTERIOR QUE SOLO ES EL NUMERO TELEFÓNICO
-     *
-     * Actualiza el número de teléfono basado en su identificador
-     *
-     * @param telefono Objeto Contacto
-     * @param id Identificador del número de teléfono a actualizar
-     * @return Objeto Response en formato JSON
-     *
-    @PatchMapping(path = "/api/v1/telefono/{id}/numero")
-    public ResponseEntity<Response> updateOnlyTelefono(
-            @RequestBody Telefono telefono,
-            @PathVariable(value="id") Integer id
-    ) {
-        response.restart();
-        try {
-            response.data = libretaService.updateOnlyTelefono(id, telefono);
-            httpStatus = HttpStatus.OK;
-        } catch (DataAccessException exception) {
-            getErrorMessageForResponse(exception);
-        } catch (Exception exception) {
-            getErrorMessageInternal(exception);
-        }
-        return new ResponseEntity(response, httpStatus);
-    }
------------------------------------------------------------------------------------
-     ESTE CAMPO IGUAL QUE EL NUMERO TELEFONICO
-
-     * Actualiza el email basado en su identificador
-     *
-     * @param email Objeto Contacto
-     * @param id Identificador del número de teléfono a actualizar
-     * @return Objeto Response en formato JSON
-     *
-    @PatchMapping(path = "/api/v1/email/{id}/correo")
-    public ResponseEntity<Response> updateOnlyEmail(
-            @RequestBody Email email,
-            @PathVariable(value="id") Integer id
-    ) {
-        response.restart();
-        try {
-            response.data = libretaService.updateOnlyEmail(id, email);
-            httpStatus = HttpStatus.OK;
-        } catch (DataAccessException exception) {
-            getErrorMessageForResponse(exception);
-        } catch (Exception exception) {
-            getErrorMessageInternal(exception);
-        }
-        return new ResponseEntity(response, httpStatus);
-    }
-     */

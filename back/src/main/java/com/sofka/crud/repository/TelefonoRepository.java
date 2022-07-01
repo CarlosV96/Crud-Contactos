@@ -1,14 +1,18 @@
 package com.sofka.crud.repository;
 
-import com.sofka.crud.domain.Contacto;
 import com.sofka.crud.domain.Telefono;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
+/**
+ * Repositorio para la entidad Telefono
+ *
+ * @author Carlos Valencia <caliche-9696@hotmail.com>
+ * @version 1.0.0 2022-07-01
+ * @since 1.0.0
+ */
 public interface TelefonoRepository extends JpaRepository<Telefono, Integer> {
 
     /**
@@ -24,14 +28,4 @@ public interface TelefonoRepository extends JpaRepository<Telefono, Integer> {
             "WHERE tel.telId = :id")
     public void updateTelefono(@Param(value = "id") Integer id, @Param(value = "telefono") String telefono);
 
-    /**
-     * Selecciona los teléfonos de un contacto en específico
-     *
-     * @param contacto Objeto del contacto
-     * @return Listado de teléfonos encontrados
-     */
-    @Query(value = "SELECT tel " +
-            "FROM Telefono tel " +
-            "WHERE tel.contacto = :contacto")
-    public List<Telefono> findAllByContacto(@Param(value = "contacto") Contacto contacto);
 }
